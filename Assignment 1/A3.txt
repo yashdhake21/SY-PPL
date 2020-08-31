@@ -1,0 +1,47 @@
+int main()                                                 |
+{                                                          |;; Function main (main, funcdef_no=0, decl_uid=1794, cgrap
+        int sum = 0;                                       |h_uid=0, symbol_order=0)
+        int i, j;                                          |
+                                                           |;; 4 loops found
+        while(sum < 100) {                                 |;;
+                sum = sum * 2;                             |;; Loop 0
+        }                                                  |;;  header 0, latch 1
+                                                           |;;  depth 0, outer -1
+        for(i=0; i<25; i++) {                              |;;  nodes: 0 1 2 3 4 5 6 7 8 9 10 11 12
+                for(j=0; j<50; j++) {                      |;;
+                        sum = sum + i*j;                   |;; Loop 2
+                }                                          |;;  header 10, latch 9
+        }                                                  |;;  depth 1, outer 0
+}                                                          |;;  nodes: 10 9 8 6 7
+                                                           |;;
+~                                                          |;; Loop 3
+~                                                          |;;  header 8, latch 7
+~                                                          |;;  depth 2, outer 2
+~                                                          |;;  nodes: 8 7
+~                                                          |;;
+~                                                          |;; Loop 1
+~                                                          |;;  header 4, latch 3
+~                                                          |;;  depth 1, outer 0
+~                                                          |;;  nodes: 4 3
+~                                                          |;; 2 succs { 4 }
+~                                                          |;; 3 succs { 4 }
+~                                                          |;; 4 succs { 3 5 }
+~                                                          |;; 5 succs { 10 }
+~                                                          |;; 6 succs { 8 }
+~                                                          |;; 7 succs { 8 }
+~                                                          |;; 8 succs { 7 9 }
+A-3.c                                                       A-3.c.011t.cfg
+
+
+Solutions
+---------
+
+        1   Basic blocks 2,  3 and 4 correspond to the  while-loop. A while loop
+            is  nothing but  a  set  of basic  blocks  with conditional  control
+            transfer, the only  notable difference being a jump to  a block that
+            has been previously executed (i.e. a backward branch).
+
+        2   A  for-loop  is  nothing  but  a  while-loop  with  the  initializer
+            separated out  into an  initial basic  block, the  body of  the loop
+            subsequently, the  increment part at the  end of the loop  body, and
+            the conditional jump back to the start of the loop.

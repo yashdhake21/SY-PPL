@@ -1,0 +1,45 @@
+                                                           |
+;; Function AddTwo (AddTwo, funcdef_no=0, decl_uid=1795, cg|;; Function AddTwo (AddTwo, funcdef_no=0, decl_uid=1795, c
+raph_uid=0, symbol_order=0)                                |graph_uid=0, symbol_order=0)
+                                                           |
+AddTwo (int a)                                             |Iterations: 0
+{                                                          |AddTwo (int a)
+  int _3;                                                  |{
+                                                           |  int _3;
+  <bb 2> [0.00%]:                                          |
+  a_2 = a_1(D) + 2;                                        |  <bb 2> [0.00%]:
+  _3 = a_2;                                                |  a_2 = a_1(D) + 2;
+  return _3;                                               |  _3 = a_2;
+                                                           |  return _3;
+}                                                          |
+                                                           |}
+                                                           |
+                                                           |
+;; Function main (main, funcdef_no=1, decl_uid=1797, cgraph|
+_uid=1, symbol_order=1)                                    |;; Function main (main, funcdef_no=1, decl_uid=1797, cgrap
+                                                           |h_uid=1, symbol_order=1)
+main ()                                                    |
+{                                                          |Considering inline candidate AddTwo.
+  int x;                                                   | Inlining AddTwo into main.
+  int _5;                                                  |Iterations: 1
+                                                           |Merging blocks 2 and 4
+  <bb 2> [0.00%]:                                          |Merging blocks 2 and 3
+  x_1 = 3;                                                 |
+  x_4 = AddTwo (x_1);                                      |Symbols to be put in SSA form
+  _5 = x_4;                                                |{ D.1809 }
+  return _5;                                               |Incremental SSA update started at block: 0
+                                                           |Number of blocks in CFG: 3
+}                                                          |Number of blocks to update: 2 ( 67%)
+B-1.c.020t.ssa                                              B-1.c.029t.einline
+
+Solutions
+---------
+
+        1   The function body exists because it may be called from another file.
+            The compiler cannot know about this before link time.
+
+        2   If the function was declared with the "static" keyword (which, in C,
+            is something  like "private  to this file  only") then  the function
+            body will disappear if there is no caller within the file.
+
+    

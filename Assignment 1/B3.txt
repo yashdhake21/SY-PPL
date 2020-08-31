@@ -1,0 +1,41 @@
+                                                           |
+;; Function main (main, funcdef_no=12, decl_uid=2976, cgrap|;; Function main (main, funcdef_no=12, decl_uid=2976, cgra
+h_uid=12, symbol_order=12)                                 |ph_uid=12, symbol_order=12) (executed once)
+                                                           |
+main ()                                                    |;; 2 loops found
+{                                                          |;;
+  int b;                                                   |;; Loop 0
+  int a;                                                   |;;  header 0, latch 1
+  int _8;                                                  |;;  depth 0, outer -1
+                                                           |;;  nodes: 0 1 2 3 4 5
+  <bb 2> [0.00%]:                                          |;;
+  a_4 = 4;                                                 |;; Loop 1
+  goto <bb 7>; [0.00%]                                     |;;  header 4, latch 3
+                                                           |;;  depth 1, outer 0
+  <bb 3> [0.00%]:                                          |;;  nodes: 4 3
+  if (a_1 <= 3)                                            |;; 2 succs { 4 }
+    goto <bb 4>; [0.00%]                                   |;; 3 succs { 4 }
+  else                                                     |;; 4 succs { 3 5 }
+    goto <bb 5>; [0.00%]                                   |;; 5 succs { 1 }
+                                                           |
+  <bb 4> [0.00%]:                                          |SSA replacement table
+  b_10 = b_3 + 2;                                          |N_i -> { O_1 ... O_j } means that N_i replaces O_1, ..., O
+  goto <bb 6>; [0.00%]                                     |_j
+                                                           |
+  <bb 5> [0.00%]:                                          |b_6 -> { b_2 }
+  b_9 = b_3 * 2;                                           |Incremental SSA update started at block: 4
+                                                           |Number of blocks in CFG: 6
+  <bb 6> [0.00%]:                                          |Number of blocks to update: 3 ( 50%)
+  # b_2 = PHI <b_10(4), b_9(5)>                            |
+  a_11 = a_1 + 1;                                          |
+                                                           |
+  <bb 7> [0.00%]:                                          |SSA replacement table
+B-3.c.020t.ssa                                              B-3.c.103t.vrp1
+
+Solution
+--------
+
+        1   Variable `a' can take the values  4 to 99. Since, the `if' condition
+            will never be  true for the give loop  bounds, [b = b +  2] is never
+            executed. Therefore, the optimized  code has eliminated this program
+            statement.

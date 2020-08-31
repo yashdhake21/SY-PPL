@@ -1,0 +1,48 @@
+int Z;                                                     |f ()
+                                                           |{
+void f()                                                   |  int a;
+{                                                          |  int b;
+        int a, b, c;                                       |  int c;
+        a = Z;                                             |
+        if (a < 10) {                                      |  a = Z;
+                b = 5;                                     |  if (a <= 9) goto <D.1801>; else goto <D.1802>;
+                c = 17;                                    |  <D.1801>:
+        } else {                                           |  b = 5;
+                b = 6;                                     |  c = 17;
+                c = 20;                                    |  goto <D.1803>;
+                if (a == 0) {                              |  <D.1802>:
+                        c = 0;                             |  b = 6;
+                }                                          |  c = 20;
+        }                                                  |  if (a == 0) goto <D.1804>; else goto <D.1805>;
+        Z = b * 10 + c;                                    |  <D.1804>:
+}                                                          |  c = 0;
+                                                           |  <D.1805>:
+~                                                          |  <D.1803>:
+~                                                          |  _1 = b * 10;
+~                                                          |  _2 = c + _1;
+~                                                          |  Z = _2;
+~                                                          |}
+~                                                          |
+~                                                          |
+~                                                          |~
+~                                                          |~
+~                                                          |~
+~                                                          |~
+~                                                          |~
+~                                                          |~
+A-2.c                                                       A-2.c.004t.gimple
+Type  :qa  and press <Enter> to exit Vim
+
+
+Solutions
+---------
+
+        1   If-blocks have been broken down  into distinct sections of code with
+            labels  (named similar  to  temporary  variables). Control  transfer
+            occurs with unconditional jumps (e.g. "goto X") or conditional jumps
+            (e.g. "if Z then goto X else goto Y").
+
+        2   The control-flow  graph dump shows  distinct basic blocks  which are
+            named sequentially starting from  1. Basic blocks roughly correspond
+            to  labels that  are created  during the  gimplification of  control
+            statements.
