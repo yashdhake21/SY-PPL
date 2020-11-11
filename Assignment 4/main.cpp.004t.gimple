@@ -1,0 +1,66 @@
+void swap(int&, int&) (int & first, int & second)
+{
+  int temp;
+
+  temp = *first;
+  _1 = *second;
+  *first = _1;
+  *second = temp;
+}
+
+
+int main() ()
+{
+  int D.39771;
+
+  {
+    int a;
+    int b;
+
+    try
+      {
+        a = 2;
+        b = 3;
+        swap (&a, &b);
+        a.0_1 = a;
+        _2 = std::basic_ostream<char>::operator<< (&cout, a.0_1);
+        _3 = std::operator<< <std::char_traits<char> > (_2, " ");
+        b.1_4 = b;
+        std::basic_ostream<char>::operator<< (_3, b.1_4);
+        D.39771 = 0;
+        return D.39771;
+      }
+    finally
+      {
+        a = {CLOBBER};
+        b = {CLOBBER};
+      }
+  }
+  D.39771 = 0;
+  return D.39771;
+}
+
+
+void __static_initialization_and_destruction_0(int, int) (int __initialize_p, int __priority)
+{
+  if (__initialize_p == 1) goto <D.39778>; else goto <D.39779>;
+  <D.39778>:
+  if (__priority == 65535) goto <D.39780>; else goto <D.39781>;
+  <D.39780>:
+  std::ios_base::Init::Init (&__ioinit);
+  __cxa_atexit (__comp_dtor , &__ioinit, &__dso_handle);
+  goto <D.39782>;
+  <D.39781>:
+  <D.39782>:
+  goto <D.39783>;
+  <D.39779>:
+  <D.39783>:
+}
+
+
+(static initializers for main.cpp) ()
+{
+  __static_initialization_and_destruction_0 (1, 65535);
+}
+
+
